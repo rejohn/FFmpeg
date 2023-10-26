@@ -334,12 +334,12 @@ function ff_hevc_put_hevc_epel_uni_v64_8_neon, export=1
 .endm
 1:      calc_all16
 .purgem calc
-2:      ld1             {v8.8b-v11.8b}, [sp]
-        add             sp, sp, #32
+2:      ld1             {v8.8b-v11.8b}, [sp], #32
         ret
 endfunc
 
 #if HAVE_I8MM
+ENABLE_I8MM
 
 .macro EPEL_H_HEADER
         movrel          x5, epel_filters
@@ -696,10 +696,9 @@ function ff_hevc_put_hevc_epel_uni_hv4_8_neon_i8mm, export=1
         add             w3, w4, #3
         mov             x4, x5
         bl              X(ff_hevc_put_hevc_epel_h4_8_neon_i8mm)
-        ldr             x30, [sp]
         ldp             x4, x6, [sp, #16]
         ldp             x0, x1, [sp, #32]
-        add             sp, sp, #48
+        ldr             x30, [sp], #48
         load_epel_filterh x6, x5
         mov             x10, #(MAX_PB_SIZE * 2)
         ld1             {v16.4h}, [sp], x10
@@ -730,10 +729,9 @@ function ff_hevc_put_hevc_epel_uni_hv6_8_neon_i8mm, export=1
         add             w3, w4, #3
         mov             x4, x5
         bl              X(ff_hevc_put_hevc_epel_h6_8_neon_i8mm)
-        ldr             x30, [sp]
         ldp             x4, x6, [sp, #16]
         ldp             x0, x1, [sp, #32]
-        add             sp, sp, #48
+        ldr             x30, [sp], #48
         load_epel_filterh x6, x5
         sub             x1, x1, #4
         mov             x10, #(MAX_PB_SIZE * 2)
@@ -767,10 +765,9 @@ function ff_hevc_put_hevc_epel_uni_hv8_8_neon_i8mm, export=1
         add             w3, w4, #3
         mov             x4, x5
         bl              X(ff_hevc_put_hevc_epel_h8_8_neon_i8mm)
-        ldr             x30, [sp]
         ldp             x4, x6, [sp, #16]
         ldp             x0, x1, [sp, #32]
-        add             sp, sp, #48
+        ldr             x30, [sp], #48
         load_epel_filterh x6, x5
         mov             x10, #(MAX_PB_SIZE * 2)
         ld1             {v16.8h}, [sp], x10
@@ -802,10 +799,9 @@ function ff_hevc_put_hevc_epel_uni_hv12_8_neon_i8mm, export=1
         add             w3, w4, #3
         mov             x4, x5
         bl              X(ff_hevc_put_hevc_epel_h12_8_neon_i8mm)
-        ldr             x30, [sp]
         ldp             x4, x6, [sp, #16]
         ldp             x0, x1, [sp, #32]
-        add             sp, sp, #48
+        ldr             x30, [sp], #48
         load_epel_filterh x6, x5
         sub             x1, x1, #8
         mov             x10, #(MAX_PB_SIZE * 2)
@@ -841,10 +837,9 @@ function ff_hevc_put_hevc_epel_uni_hv16_8_neon_i8mm, export=1
         add             w3, w4, #3
         mov             x4, x5
         bl              X(ff_hevc_put_hevc_epel_h16_8_neon_i8mm)
-        ldr             x30, [sp]
         ldp             x4, x6, [sp, #16]
         ldp             x0, x1, [sp, #32]
-        add             sp, sp, #48
+        ldr             x30, [sp], #48
         load_epel_filterh x6, x5
         mov             x10, #(MAX_PB_SIZE * 2)
         ld1             {v16.8h, v17.8h}, [sp], x10
@@ -879,10 +874,9 @@ function ff_hevc_put_hevc_epel_uni_hv24_8_neon_i8mm, export=1
         add             w3, w4, #3
         mov             x4, x5
         bl              X(ff_hevc_put_hevc_epel_h24_8_neon_i8mm)
-        ldr             x30, [sp]
         ldp             x4, x6, [sp, #16]
         ldp             x0, x1, [sp, #32]
-        add             sp, sp, #48
+        ldr             x30, [sp], #48
         load_epel_filterh x6, x5
         mov             x10, #(MAX_PB_SIZE * 2)
         ld1             {v16.8h, v17.8h, v18.8h}, [sp], x10
@@ -1970,9 +1964,7 @@ function ff_hevc_put_hevc_epel_uni_w_hv64_8_neon_i8mm, export=1
         ret
 endfunc
 
-
-
-
+DISABLE_I8MM
 #endif
 
 
